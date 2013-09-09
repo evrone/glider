@@ -1,5 +1,7 @@
 # Glider - angularjs UI slider
 
+Glider - angularjs slider with no dependencies. Dead simple - 74 LOC.
+
 ## Demo
 
 Demo is available here: http://valve.github.io/glider
