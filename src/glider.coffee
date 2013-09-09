@@ -1,5 +1,5 @@
 ###
- glider 0.0.1 - Angularjs slider
+ glider 0.0.2 - Angularjs slider
  https://github.com/Valve/glider
  Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
  Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -55,7 +55,9 @@ app.directive "slider", ["$document", ($document) ->
 
 
     scope.step = (step_value) ->
-      scope.value += step_value * step
+      inc = step_value * step
+      if (scope.value + inc) in [scope.min()..scope.max()]
+        scope.value += inc
 
     scope.mouseDown = ($event) ->
       dragging = true

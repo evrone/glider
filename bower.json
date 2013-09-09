@@ -1,7 +1,7 @@
 {
   "name": "glider",
   "main": ["glider.js", "glider.min.js", "src/css/**/*"],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "authors": [
     "Valentin Vasilyev <iamvalentin@gmail.com>",
     "Dmitry KODer Karpunin"
@@ -11,13 +11,12 @@
     "angular",
     "slider"
   ],
+  "dependencies": {"angular": "1.2.0-rc.2"},
   "license": "MIT",
   "homepage": "http://github.com/valve/glider",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ]
 }
