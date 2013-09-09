@@ -1,0 +1,87 @@
+body{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.g-slider {
+    display: inline-block;
+    width: 200px;
+    vertical-align: middle;
+    padding: 0 20px;
+    position: relative; }
+.g-slider > .slider {
+    display: block;
+    height: 13px;
+    background: #eef2f6;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    position: relative; }
+.g-slider > .slider:after {
+    content: '';
+    display: block;
+    margin: 3px;
+    height: 5px;
+    background: #bdc8d3;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #a3adb7 #a9b3bd #b0bac4;
+    box-shadow: inset 0 1px #b6c0cb, 0 1px rgba(255, 255, 255, 0.65); }
+.g-slider > .slider > .range {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+    margin: 3px;
+    height: 5px;
+    background: #555 linear-gradient(#888, #444);
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #999 #777 #444;
+    box-shadow: inset 0 1px #999; }
+.g-slider > .slider > .handle {
+    position: absolute;
+    top: -6px;
+    margin-left: -11px;
+    z-index: 2;
+    width: 24px;
+    height: 24px;
+    background: url(img/handle.png);
+    cursor: pointer; }
+.g-slider > .side {
+    position: absolute;
+    top: 0;
+    color: #999; }
+.g-slider > .side > .button {
+    display: block;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #97a5b1;
+    background: #eceff2 linear-gradient(#eceff2 25%, #c0cad4);
+    box-shadow: inset 0 1px #fff;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 11px;
+    text-align: center;
+    cursor: pointer; }
+.g-slider > .side > .button:active {
+    background: #c0cad4 linear-gradient(#c0cad4, #eceff2 75%);
+    box-shadow: inset 0 -1px #fff; }
+.g-slider > .side > .bound-value {
+    position: absolute;
+    top: 18px;
+    font-size: 12px;
+    line-height: 16px; }
+.g-slider > .side.dec {
+    left: 0; }
+.g-slider > .side.dec > .bound-value {
+    left: 1px; }
+.g-slider > .side.inc {
+    right: 0; }
+.g-slider > .side.inc > .bound-value {
+    right: 1px; }

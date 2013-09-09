@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="gliderDemo">
+<head>
+  <title>Glider - Angular.js slider directive</title>
+  <link rel="stylesheet" href="src/css/style.css"/>
+  <script src="src/bower_components/angular/angular.js"></script>
+  <script src="glider.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="gliderController">
+  <h4>Your age:</h4>
+  <slider min="21" max="90" value="age"></slider>
+  <input ng-model="age" maxlength="2"/>
+
+  <h4>Your weight:</h4>
+  <slider min="40" max="140" value="weight"></slider>
+  <input ng-model="weight" maxlength="3"/>
+  <br/>
+  <br/>
+
+  <hr/>
+  <h4>Dynamic min & max</h4>
+  Select min ({{ dynamic_min }}):
+  <slider min="0" max="100" value="dynamic_min"></slider>
+  Select max ({{ dynamic_max }}):
+  <slider min="0" max="100" value="dynamic_max"></slider>
+
+  <h4>Slider with min & max dynamically defined above with two sliders</h4>
+  <slider min="dynamic_min" max="dynamic_max" value="dynamic_value"></slider>
+  <input ng-model="dynamic_value"/>
+
+</body>
+</html>
