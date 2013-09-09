@@ -1,5 +1,9 @@
 # Glider - angularjs UI slider
 
+## Demo
+
+Demo is available here: http://valve.github.io/glider
+
 ## Installation
 
 ### Bower
