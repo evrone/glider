@@ -23,10 +23,7 @@ and
 
 After that you can add the file to sprockets:
 
-`
-//= require glider
-
-`
+` //= require glider `
 
 ## Usage
 
@@ -61,7 +58,7 @@ This will compile the src/glider.coffee to glider.js
 
 ## Minification
 
-To minify the file I recommend using [uglifyjs][uglifyjs](requires node.js)
+To minify the file I recommend using [uglifyjs][uglifyjs]
 If you don't have it installed, install it with:
 
 ```
