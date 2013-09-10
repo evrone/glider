@@ -12,8 +12,6 @@ Demo is available here: http://evrone.github.io/glider
 
 `bower install glider`
 
-UPD: bower install is currently unavailable, due to project moving to a new location
-
 ### Ruby-on-Rails
 
 Add this to your Gemfile
