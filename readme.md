@@ -47,7 +47,7 @@ To convert the `src/glider.coffee` to javascript, use coffeescript compiler.
 Install it with:
 
 ```
-npm -g install coffee-script'
+npm -g install coffee-script
 ```
 
 Then compile the file with:

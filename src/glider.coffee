@@ -1,18 +1,21 @@
 ###
- glider 0.0.2 - Angularjs slider
- https://github.com/Valve/glider
+ glider 0.0.3 - AngularJS slider
+ https://github.com/evrone/glider
  Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
  Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
 ###
 app = angular.module("glider", [])
 # example:
-# <slider min="0" max="100" step="1" value="scope.age"></slider>
+# <slider min="0" max="100" step="1" value="age"></slider>
 #
 app.directive "slider", ["$document", ($document) ->
 
+  getSubElement = (sliderElement, className) ->
+    sliderElement[0].getElementsByClassName(className)[0]
+
   moveHandle = (elem, posX) ->
-    angular.element(elem[0].getElementsByClassName('handle')[0]).css("left", "#{posX}%")
-    angular.element(elem[0].getElementsByClassName('range')[0]).css("width", "#{posX}%")
+    angular.element(getSubElement(elem, "handle")).css("left", "#{posX}%")
+    angular.element(getSubElement(elem, "range")).css("width", "#{posX}%")
 
   template: """
     <span class="g-slider horizontal">
@@ -34,30 +37,46 @@ app.directive "slider", ["$document", ($document) ->
   restrict: "E"
   scope:
     value: "="
-    min: '&'
-    max: '&'
+    min: "&"
+    max: "&"
 
   link: (scope, element, attrs) ->
+    sliderElement = getSubElement(element, "slider")
     dragging = false
-    startPointX = 0
     xPosition = 0
     step = if attrs.step? then parseInt(attrs.step, 10) else 1
 
     scope.value = scope.min() unless scope.value?
 
+    refreshHandle = ->
+      range = scope.max() - scope.min()
+      if range is 0
+        xPosition = 0
+      else
+        xPosition = (scope.value - scope.min()) / range * 100
+        xPosition = Math.min(Math.max(0, xPosition), 100)
+      moveHandle element, xPosition
+
+    scope.$watch "min()", (minValue) ->
+      if scope.value < minValue
+        scope.value = minValue
+      else
+        refreshHandle()
+
+    scope.$watch "max()", (maxValue) ->
+      if scope.value > maxValue
+        scope.value = maxValue
+      else
+        refreshHandle()
+
     scope.$watch "value", ->
       return  if dragging
-      xPosition = (scope.value - scope.min()) / (scope.max() - scope.min()) * 100
-      if xPosition < 0
-        xPosition = 0
-      else xPosition = 100  if xPosition > 100
-      moveHandle(element, xPosition)
+      refreshHandle()
 
-
-    scope.step = (step_value) ->
-      inc = step_value * step
-      if (scope.value + inc) in [scope.min()..scope.max()]
-        scope.value += inc
+    scope.step = (steps) ->
+      newValue = scope.value + steps * step
+      if scope.min() <= newValue <= scope.max()
+        scope.value = newValue
 
     scope.mouseDown = ($event) ->
       dragging = true
@@ -66,9 +85,9 @@ app.directive "slider", ["$document", ($document) ->
       $document.on "mousemove", ($event) ->
         return  unless dragging
 
-        #Calculate handle position
+        # Calculate value handle position
         moveDelta = $event.pageX - startPointX
-        xPosition = xPosition + ((moveDelta / element[0].offsetWidth) * 100)
+        xPosition += moveDelta / sliderElement.offsetWidth * 100
         if xPosition < 0
           xPosition = 0
         else if xPosition > 100
@@ -78,9 +97,10 @@ app.directive "slider", ["$document", ($document) ->
         scope.value = Math.round((((scope.max() - scope.min()) * (xPosition / 100)) + scope.min()) / step) * step
         scope.$apply()
 
-        moveHandle(element, xPosition)
+        moveHandle element, xPosition
 
-      $document.on 'mouseup', ->
+      # TODO check binding leaks
+      $document.on "mouseup", ->
         dragging = false
-        $document.off("mousemove")
+        $document.off "mousemove"
 ]
