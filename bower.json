@@ -1,19 +1,19 @@
 {
   "name": "glider",
   "main": ["glider.js", "glider.min.js", "src/css/**/*"],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "authors": [
     "Valentin Vasilyev <iamvalentin@gmail.com>",
-    "Dmitry KODer Karpunin"
+    "Dmitry KODer Karpunin <koderfunk@gmail.com>"
   ],
-  "description": "Angularjs slider",
+  "description": "AngularJS slider",
   "keywords": [
     "angular",
     "slider"
   ],
   "dependencies": {"angular": "1.2.0-rc.2"},
   "license": "MIT",
-  "homepage": "http://github.com/valve/glider",
+  "homepage": "http://github.com/evrone/glider",
   "ignore": [
     "**/.*",
     "node_modules",
