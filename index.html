@@ -36,36 +36,39 @@
       <section>
         <div id="title">
           <h1>Glider</h1>
-          <p>Angularjs slider</p>
+          <p>AngularJS slider</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/Valve">Valve</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
         <h3>
-        <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Glider Demo<h3>
-          <h4>Your age:</h4>
-          <slider min="21" max="90" value="age"></slider>
-          <input ng-model="age" maxlength="2"/>
-          <br/>
-          <br/>
+          <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Glider Demo
+        </h3>
+        <h4>Your age:</h4>
+        <slider min="21" max="90" value="age"></slider>
+        <input ng-model="age" maxlength="2"/>
+        <br/>
+        <br/>
 
-          <h4>Your weight:</h4>
-          <slider min="40" max="140" value="weight"></slider>
-          <input ng-model="weight" maxlength="3"/>
-          <br/>
-          <br/>
+        <h4>Your weight:</h4>
+        <slider min="40" max="140" value="weight"></slider>
+        <input ng-model="weight" maxlength="3"/>
+        <br/>
+        <br/>
 
-          <hr/>
-          <h4>Dynamic min & max</h4>
-          Select min ({{ dynamic_min }}):
-          <slider min="0" max="100" value="dynamic_min"></slider><br/><br/>
-          Select max ({{ dynamic_max }}):
-          <slider min="0" max="100" value="dynamic_max"></slider><br/><br/>
+        <hr/>
+        <h4>Dynamic min & max</h4>
+        Select min ({{ dynamic_min }}):
+        <slider min="0" max="100" value="dynamic_min"></slider><br/><br/>
+        Select max ({{ dynamic_max }}):
+        <slider min="0" max="100" value="dynamic_max"></slider><br/><br/>
 
-          <h4>Slider with min & max dynamically defined above with two sliders</h4>
-          <slider min="dynamic_min" max="dynamic_max" value="dynamic_value"></slider>
-          <input ng-model="dynamic_value"/>
+        <h4>Slider with min & max dynamically defined above with two sliders</h4>
+        <slider min="dynamic_min" max="dynamic_max" value="dynamic_value"></slider>
+        <input ng-model="dynamic_value"/>
+      </section>
+    </div>
 
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
