@@ -83,7 +83,7 @@
             var startPointX, updateValue;
             dragging = true;
             startPointX = $event.pageX;
-            updateValue = function(event) {
+            updateValue = function() {
               scope.value = Math.round((((scope.max() - scope.min()) * (xPosition / 100)) + scope.min()) / step) * step;
               return scope.$apply();
             };
@@ -92,24 +92,24 @@
               if (!dragging) {
                 return;
               }
-              moveDelta = event.pageX - startPointX;
+              moveDelta = $event.pageX - startPointX;
               xPosition += moveDelta / sliderElement.offsetWidth * 100;
               if (xPosition < 0) {
                 xPosition = 0;
               } else if (xPosition > 100) {
                 xPosition = 100;
               } else {
-                startPointX = event.pageX;
+                startPointX = $event.pageX;
               }
               if (!deferUpdate) {
-                updateValue($event);
+                updateValue();
               }
               return moveHandle(element, xPosition);
             });
-            return $document.on("mouseup", function($event) {
+            return $document.on("mouseup", function() {
               dragging = false;
               if (deferUpdate) {
-                updateValue($event);
+                updateValue();
               }
               return $document.off("mousemove");
             });
