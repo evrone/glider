@@ -14,4 +14,6 @@ angular.module('gliderDemo', ['glider']).controller('gliderController', function
 
   $scope.dynamic_value = $scope.dynamic_min + ($scope.dynamic_max - $scope.dynamic_min)/2;
 
+  $scope.deferred_age = 40;
+
 });
