@@ -83,7 +83,7 @@
             var startPointX, updateValue;
             dragging = true;
             startPointX = $event.pageX;
-            updateValue = function(event) {
+            updateValue = function() {
               scope.value = Math.round((((scope.max() - scope.min()) * (xPosition / 100)) + scope.min()) / step) * step;
               return scope.$apply();
             };
@@ -102,14 +102,14 @@
                 startPointX = event.pageX;
               }
               if (!deferUpdate) {
-                updateValue($event);
+                updateValue();
               }
               return moveHandle(element, xPosition);
             });
             return $document.on("mouseup", function($event) {
               dragging = false;
               if (deferUpdate) {
-                updateValue($event);
+                updateValue();
               }
               return $document.off("mousemove");
             });

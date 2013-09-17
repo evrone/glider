@@ -1,6 +1,6 @@
 # Glider - angularjs UI slider
 
-Glider - angularjs slider with no dependencies. Dead simple - 74 LOC.
+Glider - angularjs slider with no dependencies. Dead simple - ~~74~~ 98 LOC.
 
 ## Demo
 
@@ -39,6 +39,12 @@ And then in HTML:
 
 ```html
 <slider min="21" max="130" value="age"></slider>
+```
+
+To defer value update until `mouseup`:
+
+```html
+<slider defer_update min="21" max="130" value="age"></slider>
 ```
 
 ## CoffeeScript to JavaScript compilation

@@ -85,7 +85,7 @@ app.directive "slider", ["$document", ($document) ->
       dragging = true
       startPointX = $event.pageX
 
-      updateValue = (event)->
+      updateValue = ->
         scope.value = Math.round((((scope.max() - scope.min()) * (xPosition / 100)) + scope.min()) / step) * step
         scope.$apply()
 
@@ -100,12 +100,11 @@ app.directive "slider", ["$document", ($document) ->
           xPosition = 100
         else
           startPointX = event.pageX
-        updateValue($event) unless deferUpdate
+        updateValue() unless deferUpdate
         moveHandle element, xPosition
 
-      # TODO check binding leaks
       $document.on "mouseup", ($event)->
         dragging = false
-        updateValue($event) if deferUpdate
+        updateValue() if deferUpdate
         $document.off "mousemove"
 ]
