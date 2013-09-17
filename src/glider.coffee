@@ -1,5 +1,5 @@
 ###
- glider 0.0.3 - AngularJS slider
+ glider 0.0.4 - AngularJS slider
  https://github.com/evrone/glider
  Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
  Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -7,6 +7,8 @@
 app = angular.module("glider", [])
 # example:
 # <slider min="0" max="100" step="1" value="age"></slider>
+# example with update only on mouse up and stop drag
+# <slider defer_update min="0" max="100" step="1" value="age"></slider>
 #
 app.directive "slider", ["$document", ($document) ->
 
@@ -45,6 +47,7 @@ app.directive "slider", ["$document", ($document) ->
     dragging = false
     xPosition = 0
     step = if attrs.step? then parseInt(attrs.step, 10) else 1
+    deferUpdate =  attrs.deferUpdate?
 
     scope.value = scope.min() unless scope.value?
 
@@ -82,25 +85,27 @@ app.directive "slider", ["$document", ($document) ->
       dragging = true
       startPointX = $event.pageX
 
+      updateValue = (event)->
+        scope.value = Math.round((((scope.max() - scope.min()) * (xPosition / 100)) + scope.min()) / step) * step
+        scope.$apply()
+
       $document.on "mousemove", ($event) ->
         return  unless dragging
-
         # Calculate value handle position
-        moveDelta = $event.pageX - startPointX
+        moveDelta = event.pageX - startPointX
         xPosition += moveDelta / sliderElement.offsetWidth * 100
         if xPosition < 0
           xPosition = 0
         else if xPosition > 100
           xPosition = 100
         else
-          startPointX = $event.pageX
-        scope.value = Math.round((((scope.max() - scope.min()) * (xPosition / 100)) + scope.min()) / step) * step
-        scope.$apply()
-
+          startPointX = event.pageX
+        updateValue($event) unless deferUpdate
         moveHandle element, xPosition
 
       # TODO check binding leaks
-      $document.on "mouseup", ->
+      $document.on "mouseup", ($event)->
         dragging = false
+        updateValue($event) if deferUpdate
         $document.off "mousemove"
 ]
