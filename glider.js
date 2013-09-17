@@ -92,21 +92,21 @@
               if (!dragging) {
                 return;
               }
-              moveDelta = event.pageX - startPointX;
+              moveDelta = $event.pageX - startPointX;
               xPosition += moveDelta / sliderElement.offsetWidth * 100;
               if (xPosition < 0) {
                 xPosition = 0;
               } else if (xPosition > 100) {
                 xPosition = 100;
               } else {
-                startPointX = event.pageX;
+                startPointX = $event.pageX;
               }
               if (!deferUpdate) {
                 updateValue();
               }
               return moveHandle(element, xPosition);
             });
-            return $document.on("mouseup", function($event) {
+            return $document.on("mouseup", function() {
               dragging = false;
               if (deferUpdate) {
                 updateValue();

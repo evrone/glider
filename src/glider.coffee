@@ -92,18 +92,18 @@ app.directive "slider", ["$document", ($document) ->
       $document.on "mousemove", ($event) ->
         return  unless dragging
         # Calculate value handle position
-        moveDelta = event.pageX - startPointX
+        moveDelta = $event.pageX - startPointX
         xPosition += moveDelta / sliderElement.offsetWidth * 100
         if xPosition < 0
           xPosition = 0
         else if xPosition > 100
           xPosition = 100
         else
-          startPointX = event.pageX
+          startPointX = $event.pageX
         updateValue() unless deferUpdate
         moveHandle element, xPosition
 
-      $document.on "mouseup", ($event)->
+      $document.on "mouseup", ->
         dragging = false
         updateValue() if deferUpdate
         $document.off "mousemove"
