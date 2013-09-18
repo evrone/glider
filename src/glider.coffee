@@ -1,9 +1,10 @@
 ###
- glider 0.0.4 - AngularJS slider
+ glider 0.0.5 - AngularJS slider
  https://github.com/evrone/glider
  Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
  Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
 ###
+'use strict';
 app = angular.module("glider", [])
 # example:
 # <slider min="0" max="100" step="1" value="age"></slider>
@@ -27,11 +28,11 @@ app.directive "slider", ["$document", ($document) ->
       </span>
       <span class="side dec">
         <span class="button" ng-click="step(-1)">-</span>
-        <span class="bound-value">{{min()}}</span>
+        <span class="bound-value">{{min() | slice}}</span>
       </span>
       <span class="side inc">
         <span class="button" ng-click="step(+1)">+</span>
-        <span class="bound-value">{{max()}}</span>
+        <span class="bound-value">{{max() | slice}}</span>
       </span>
     </span>
     """
@@ -108,3 +109,12 @@ app.directive "slider", ["$document", ($document) ->
         updateValue() if deferUpdate
         $document.off "mousemove"
 ]
+app.filter 'slice',  ->
+  (input) ->
+    input = input.toString()
+    reverse = (input) -> input.split('').reverse().join('')
+    reversed = reverse(input)
+    reversed_and_sliced = reversed.replace(/(.{3})/g, '$1 ')
+    sliced = reverse(reversed_and_sliced)
+    sliced.trim()
+

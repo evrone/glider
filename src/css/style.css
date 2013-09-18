@@ -76,7 +76,8 @@ body{
     position: absolute;
     top: 18px;
     font-size: 12px;
-    line-height: 16px; }
+    line-height: 16px;
+    white-space: nowrap;}
 .g-slider > .side.dec {
     left: 0; }
 .g-slider > .side.dec > .bound-value {
