@@ -45,6 +45,7 @@ app.directive "slider", ["$document", ($document) ->
         <span ng-repeat="i in increments" class="i" style="left: {{i.offset}}%">
           {{ i.value | intersperse }}
         </span>
+      </span>
     </span>
     """
 
