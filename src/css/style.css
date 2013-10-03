@@ -11,15 +11,15 @@ body{
     width: 200px;
     vertical-align: middle;
     padding: 0 20px;
-    position: relative; }
+    position: relative;
+}
 .g-slider > .slider {
     display: block;
     height: 13px;
     background: #eef2f6;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ddd;
-    position: relative; }
+    border: 1px solid #ddd;
+    position: relative;
+    z-index: 2;}
 .g-slider > .slider:after {
     content: '';
     display: block;
@@ -86,3 +86,18 @@ body{
     right: 0; }
 .g-slider > .side.inc > .bound-value {
     right: 1px; }
+.g-slider > .increments {
+    position: relative;
+    display: block;
+}
+.g-slider > .increments > .i {
+    position: absolute;
+    font-size: 10px;
+    color: #999;
+    padding-right: 5px;
+    border-left: 1px solid #bbb;
+    padding-top: 20px;
+    padding-left: 2px;
+    top: -22px;
+    z-index: 1;
+}

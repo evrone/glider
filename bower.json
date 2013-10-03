@@ -1,7 +1,7 @@
 {
   "name": "glider",
   "main": ["glider.js", "glider.min.js", "src/css/**/*"],
-  "version": "0.0.6",
+  "version": "0.1.0",
   "authors": [
     "Valentin Vasilyev <iamvalentin@gmail.com>",
     "Dmitry KODer Karpunin <koderfunk@gmail.com>"

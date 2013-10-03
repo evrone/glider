@@ -1,16 +1,23 @@
 ###
- glider 0.0.6 - AngularJS slider
- https://github.com/evrone/glider
- Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
- Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
+  glider 0.1.0 - AngularJS slider
+  https://github.com/evrone/glider
+  Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
+  Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
+
+  examples:
+
+  basic:
+  <slider min="0" max="100" step="1" value="age"></slider>
+
+  update only on mouse up
+  <slider defer_update min="0" max="100" step="1" value="age"></slider>
+
+  slider with increments (incompatible with step option)
+  <slider min="0" max="100" increments="10,50,60,90"></slider>
 ###
 'use strict';
 app = angular.module("glider", [])
-# example:
-# <slider min="0" max="100" step="1" value="age"></slider>
-# example with update only on mouse up and stop drag
-# <slider defer_update min="0" max="100" step="1" value="age"></slider>
-#
+
 app.directive "slider", ["$document", ($document) ->
 
   getSubElement = (sliderElement, className) ->
@@ -28,14 +35,19 @@ app.directive "slider", ["$document", ($document) ->
       </span>
       <span class="side dec">
         <span class="button" ng-click="step(-1)">-</span>
-        <span class="bound-value">{{min() | slice}}</span>
+        <span class="bound-value">{{min() | intersperse}}</span>
       </span>
       <span class="side inc">
         <span class="button" ng-click="step(+1)">+</span>
-        <span class="bound-value">{{max() | slice}}</span>
+        <span class="bound-value">{{max() | intersperse}}</span>
       </span>
+      <span class="increments">
+        <span ng-repeat="i in increments" class="i" style="left: {{i.offset}}%">
+          {{ i.value | intersperse }}
+        </span>
     </span>
     """
+
   replace: true
   restrict: "E"
   scope:
@@ -44,6 +56,17 @@ app.directive "slider", ["$document", ($document) ->
     max: "&"
 
   link: (scope, element, attrs) ->
+    parseIncrements = ->
+      trim = (input) -> if input then input.replace(/^\s+|\s+$/g, '') else input
+      offset = (min, max, value) -> value / Math.abs(max - min) * 100
+      if attrs.increments
+        min = scope.min()
+        max = scope.max()
+        increments = attrs.increments.split(',')
+        increments = for i in increments when min < parseInt(i) < max
+          value: parseInt(trim(i), 10)
+          offset: offset(min, max, i)
+
     sliderElement = getSubElement(element, "slider")
     dragging = false
     xPosition = 0
@@ -51,6 +74,12 @@ app.directive "slider", ["$document", ($document) ->
     deferUpdate =  attrs.deferUpdate?
 
     scope.value = scope.min() unless scope.value?
+
+    scope.increments = parseIncrements(attrs.increments)
+    if attrs.increments?
+      scope.snapValues = ([scope.min(), scope.max()].concat(i.value for i in scope.increments))
+        .sort((a,b) -> a - b)
+
 
     refreshHandle = ->
       range = scope.max() - scope.min()
@@ -73,14 +102,31 @@ app.directive "slider", ["$document", ($document) ->
       else
         refreshHandle()
 
-    scope.$watch "value", ->
+    scope.$watch "value", (newVal, oldVal)->
       return  if dragging
-      refreshHandle()
+      if scope.min() <= newVal <= scope.max()
+        refreshHandle()
+      else
+        newVal = oldVal
 
     scope.step = (steps) ->
-      newValue = scope.value + steps * step
-      if scope.min() <= newValue <= scope.max()
-        scope.value = newValue
+      doStep = (steps)->
+        newValue = scope.value + steps * step
+        if scope.min() <= newValue <= scope.max()
+          scope.value = newValue
+
+      doIncrement = (steps) ->
+        newVal = if steps > 0
+          (sv for sv in scope.snapValues when sv > scope.value)[0]
+        else
+          (sv for sv in scope.snapValues when sv < scope.value).sort((a,b) -> b - a)[0]
+        scope.value = newVal if newVal?
+
+      if attrs.increments?
+        doIncrement(steps)
+      else
+        doStep(steps)
+
 
     scope.mouseDown = ($event) ->
       dragging = true
@@ -88,6 +134,20 @@ app.directive "slider", ["$document", ($document) ->
 
       updateValue = ->
         scope.value = Math.round((((scope.max() - scope.min()) * (xPosition / 100)) + scope.min()) / step) * step
+        scope.$apply()
+
+      snap = ->
+        i = 0
+        l = scope.snapValues.length
+
+        while i < l
+          diff = Math.abs(scope.snapValues[i] - scope.value)
+          min = diff unless min?
+          if diff <= min
+            closest = scope.snapValues[i]
+            min = diff
+          i++
+        scope.value = closest
         scope.$apply()
 
       $document.on "mousemove", ($event) ->
@@ -107,9 +167,10 @@ app.directive "slider", ["$document", ($document) ->
       $document.on "mouseup", ->
         dragging = false
         updateValue() if deferUpdate
+        snap() if scope.increments
         $document.off "mousemove"
 ]
-app.filter 'slice',  ->
+app.filter 'intersperse',  ->
   (input) ->
     return unless input?
     input = input.toString()
