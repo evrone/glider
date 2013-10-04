@@ -1,15 +1,16 @@
 {
   "name": "glider",
   "main": ["glider.js", "glider.min.js", "src/css/**/*"],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
-    "Valentin Vasilyev <iamvalentin@gmail.com>",
+    "Valentin Valve Vasilyev <iamvalentin@gmail.com>",
     "Dmitry KODer Karpunin <koderfunk@gmail.com>"
   ],
-  "description": "AngularJS slider",
+  "description": "AngularJS UI slider",
   "keywords": [
     "angular",
-    "slider"
+    "slider",
+    "ui"
   ],
   "dependencies": {"angular": "1.2.0-rc.2"},
   "license": "MIT",

@@ -1,5 +1,5 @@
 ###
-  glider 0.1.0 - AngularJS slider
+  glider 0.1.1 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -18,14 +18,14 @@
 'use strict';
 app = angular.module("glider", [])
 
-app.directive "slider", ["$document", ($document) ->
+app.directive 'slider', ['$document', ($document) ->
 
   getSubElement = (sliderElement, className) ->
     sliderElement[0].getElementsByClassName(className)[0]
 
   moveHandle = (elem, posX) ->
-    angular.element(getSubElement(elem, "handle")).css("left", "#{posX}%")
-    angular.element(getSubElement(elem, "range")).css("width", "#{posX}%")
+    angular.element(getSubElement(elem, 'handle')).css('left', "#{posX}%")
+    angular.element(getSubElement(elem, 'range')).css('width', "#{posX}%")
 
   template: """
     <span class="g-slider horizontal">
@@ -68,7 +68,12 @@ app.directive "slider", ["$document", ($document) ->
           value: parseInt(trim(i), 10)
           offset: offset(min, max, i)
 
-    sliderElement = getSubElement(element, "slider")
+    createSnapValues = (increments)->
+      if attrs.increments?
+        ([scope.min(), scope.max()].concat(i.value for i in increments)).sort((a,b) -> a - b)
+
+
+    sliderElement = getSubElement(element, 'slider')
     dragging = false
     xPosition = 0
     step = if attrs.step? then parseInt(attrs.step, 10) else 1
@@ -77,10 +82,7 @@ app.directive "slider", ["$document", ($document) ->
     scope.value = scope.min() unless scope.value?
 
     scope.increments = parseIncrements(attrs.increments)
-    if attrs.increments?
-      scope.snapValues = ([scope.min(), scope.max()].concat(i.value for i in scope.increments))
-        .sort((a,b) -> a - b)
-
+    scope.snapValues = createSnapValues(scope.increments)
 
     refreshHandle = ->
       range = scope.max() - scope.min()
@@ -91,19 +93,19 @@ app.directive "slider", ["$document", ($document) ->
         xPosition = Math.min(Math.max(0, xPosition), 100)
       moveHandle element, xPosition
 
-    scope.$watch "min()", (minValue) ->
+    scope.$watch 'min()', (minValue) ->
       if scope.value < minValue
         scope.value = minValue
       else
         refreshHandle()
 
-    scope.$watch "max()", (maxValue) ->
+    scope.$watch 'max()', (maxValue) ->
       if scope.value > maxValue
         scope.value = maxValue
       else
         refreshHandle()
 
-    scope.$watch "value", (newVal, oldVal)->
+    scope.$watch 'value', (newVal, oldVal)->
       return  if dragging
       if scope.min() <= newVal <= scope.max()
         refreshHandle()
@@ -151,9 +153,8 @@ app.directive "slider", ["$document", ($document) ->
         scope.value = closest
         scope.$apply()
 
-      $document.on "mousemove", ($event) ->
+      $document.on 'mousemove', ($event) ->
         return  unless dragging
-        # Calculate value handle position
         moveDelta = $event.pageX - startPointX
         xPosition += moveDelta / sliderElement.offsetWidth * 100
         if xPosition < 0
@@ -165,11 +166,11 @@ app.directive "slider", ["$document", ($document) ->
         updateValue() unless deferUpdate
         moveHandle element, xPosition
 
-      $document.on "mouseup", ->
+      $document.on 'mouseup', ->
         dragging = false
         updateValue() if deferUpdate
         snap() if scope.increments
-        $document.off "mousemove"
+        $document.off 'mousemove'
 ]
 app.filter 'intersperse',  ->
   (input) ->
