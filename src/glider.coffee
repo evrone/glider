@@ -1,5 +1,5 @@
 ###
-  glider 0.1.1 - AngularJS slider
+  glider 0.1.2 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -59,7 +59,9 @@ app.directive 'slider', ['$document', ($document) ->
   link: (scope, element, attrs) ->
     parseIncrements = ->
       trim = (input) -> if input then input.replace(/^\s+|\s+$/g, '') else input
-      offset = (min, max, value) -> value / Math.abs(max - min) * 100
+      offset = (min, max, value) ->
+        value = parseInt(value) - min
+        value / Math.abs(max - min) * 100
       if attrs.increments
         min = scope.min()
         max = scope.max()

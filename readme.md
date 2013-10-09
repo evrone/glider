@@ -1,6 +1,6 @@
 # Glider - angularjs UI slider
 
-Glider - angularjs slider with no dependencies. Dead simple - ~~74~~ 98 LOC.
+Glider - angularjs slider with no dependencies. Dead simple - ~~74~~ ~~98~~ 165 LOC.
 
 ## Demo
 
@@ -47,6 +47,12 @@ To defer value update until `mouseup`:
 <slider defer_update min="21" max="130" value="age"></slider>
 ```
 
+Use increments with snapping:
+
+```html
+<slider min="50" max="500" increments="100,200,300,400" value="price"></slider>
+```
+
 ## CoffeeScript to JavaScript compilation
 
 To convert the `src/glider.coffee` to javascript, use coffeescript compiler.
@@ -59,10 +65,10 @@ npm -g install coffee-script
 Then compile the file with:
 
 ```
-coffee -c -o . src/glider.coffee
+coffee -c -o . --map src/glider.coffee
 ```
 
-This will compile the src/glider.coffee to glider.js
+This will compile the src/glider.coffee to glider.js and generate the source map.
 
 ## Minification
 
@@ -89,13 +95,13 @@ online services, such as [Google Closure compiler][closure]
 * Valve - Valentin Vasilyev
 * KODerFunk - Dmitry Karpunin
 
-Inspired by a plunkr snippet
+Inspired by an anonymous plunkr snippet
 
 ### Licence
 
 This code is [MIT][mit] licenced:
 
-Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
+Copyright (c) 2013 Valentin Valve Vasilyev, Dmitry KODer Karpunin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
