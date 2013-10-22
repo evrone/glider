@@ -53,6 +53,15 @@ body{
     height: 24px;
     background: url(img/handle.png);
     cursor: pointer; }
+.g-slider > .slider > .handle > .value {
+    font-size: 12px;
+    line-height: 16px;
+    width: 50px;
+    position: absolute;
+    left: -13px;
+    top: -16px;
+    text-align: center;
+    cursor: default; }
 .g-slider > .side {
     position: absolute;
     top: 0;

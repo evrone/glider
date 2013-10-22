@@ -24,9 +24,9 @@
   <body ng-controller="gliderController">
       <div id="header">
         <nav>
-          <li class="fork"><a href="https://github.com/Valve/glider">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/Valve/glider/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/Valve/glider/tarball/master">TAR</a></li>
+          <li class="fork"><a href="https://github.com/evrone/glider">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/evrone/glider/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/evrone/glider/tarball/master">TAR</a></li>
           <li class="title">DOWNLOADS</li>
         </nav>
       </div><!-- end header -->
@@ -75,9 +75,18 @@
           <input ng-model="deferred_age" maxlength="2"/>
           <br/>
           <br/>
+
+          <hr/>
+          <h4>Show value in handle</h4>
+          <br/>
+          <slider show_value_in_handle min="21" max="90" value="show_value_in_handle_value"></slider>
+          <input ng-model="show_value_in_handle_value" maxlength="2"/>
+          <br/>
+          <br/>
+
           <hr/>
           <h4>Increments</h4>
-          <slider  style="width: 700px" min="0" max="1000" value="inc_val" increments="100, 200, 700, 900"></slider>
+          <slider  style="width: 600px" min="0" max="1000" value="inc_val" increments="100, 200, 700, 900"></slider>
           <br/>
           <br/>
 
