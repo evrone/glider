@@ -15,5 +15,6 @@ angular.module('gliderDemo', ['glider']).controller('gliderController', function
   $scope.dynamic_value = ($scope.dynamic_max - $scope.dynamic_min)/2;
 
   $scope.deferred_value = 40000;
+  $scope.show_value_in_handle_value = 40000;
 
 });

@@ -47,6 +47,12 @@ To defer value update until `mouseup`:
 <slider defer_update min="21" max="130" value="age"></slider>
 ```
 
+Show value in handle:
+
+```html
+<slider show_value_in_handle min="21" max="130" value="age"></slider>
+```
+
 Use increments with snapping:
 
 ```html

@@ -1,5 +1,5 @@
 ###
-  glider 0.1.2 - AngularJS slider
+  glider 0.1.3 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -9,16 +9,19 @@
   basic:
   <slider min="0" max="100" step="1" value="age"></slider>
 
-  update only on mouse up
+  update only on mouse up:
   <slider defer_update min="0" max="100" step="1" value="age"></slider>
+
+  show value in handle:
+  <slider show_value_in_handle min="0" max="100" step="1" value="age"></slider>
 
   slider with increments (incompatible with step option)
   <slider min="0" max="100" increments="10,50,60,90"></slider>
 ###
 'use strict';
-app = angular.module("glider", [])
+gliderModule = angular.module('glider', [])
 
-app.directive 'slider', ['$document', ($document) ->
+gliderModule.directive 'slider', ['$document', ($document) ->
 
   getSubElement = (sliderElement, className) ->
     sliderElement[0].getElementsByClassName(className)[0]
@@ -31,7 +34,9 @@ app.directive 'slider', ['$document', ($document) ->
     <span class="g-slider horizontal">
       <span class="slider">
         <span class="range"></span>
-        <span class="handle" ng-mousedown="mouseDown($event)"></span>
+        <span class="handle" ng-mousedown="mouseDown($event)">
+          <span class="value" ng-show="showValueInHandle">{{value | intersperse}}</span>
+        </span>
       </span>
       <span class="side dec">
         <span class="button" ng-click="step(-1)">-</span>
@@ -80,6 +85,7 @@ app.directive 'slider', ['$document', ($document) ->
     xPosition = 0
     step = if attrs.step? then parseInt(attrs.step, 10) else 1
     deferUpdate =  attrs.deferUpdate?
+    scope.showValueInHandle = attrs.showValueInHandle?
 
     scope.value = scope.min() unless scope.value?
 
@@ -134,6 +140,7 @@ app.directive 'slider', ['$document', ($document) ->
 
 
     scope.mouseDown = ($event) ->
+      return unless angular.element($event.target).hasClass('handle')
       dragging = true
       startPointX = $event.pageX
 
@@ -174,7 +181,7 @@ app.directive 'slider', ['$document', ($document) ->
         snap() if scope.increments
         $document.off 'mousemove'
 ]
-app.filter 'intersperse',  ->
+gliderModule.filter 'intersperse', ->
   (input) ->
     return unless input?
     input = input.toString()
