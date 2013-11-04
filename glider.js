@@ -44,7 +44,8 @@
         scope: {
           value: "=",
           min: "&",
-          max: "&"
+          max: "&",
+          stepSize: "@"
         },
         link: function(scope, element, attrs) {
           var createSnapValues, deferUpdate, dragging, parseIncrements, refreshHandle, sliderElement, step, xPosition;
@@ -100,7 +101,7 @@
           sliderElement = getSubElement(element, 'slider');
           dragging = false;
           xPosition = 0;
-          step = attrs.step != null ? parseInt(attrs.step, 10) : 1;
+          step = scope.stepSize ? scope.stepSize : 1;
           deferUpdate = attrs.deferUpdate != null;
           scope.showValueInHandle = attrs.showValueInHandle != null;
           if (scope.value == null) {
