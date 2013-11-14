@@ -1,5 +1,5 @@
 ###
-  glider 0.1.4.1 - AngularJS slider
+  glider 0.1.4.2 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -25,28 +25,28 @@ gliderModule = angular.module('glider', [])
 gliderModule.directive 'slider', ['$document', ($document) ->
 
   template: """
-    <span class="g-slider horizontal">
-      <span class="slider" ng-click="sliderClick($event)">
-        <span class="range" style="width: {{xPosition}}%;"></span>
-        <span class="handle" style="left: {{xPosition}}%;" ng-mousedown="handleMouseDown($event)">
-          <span class="value" ng-show="showValueInHandle">{{handleValue | intersperse}}</span>
-        </span>
-      </span>
-      <span class="side dec">
-        <span class="button" ng-click="step(-1)">-</span>
-        <span class="bound-value">{{min() | intersperse}}</span>
-      </span>
-      <span class="side inc">
-        <span class="button" ng-click="step(+1)">+</span>
-        <span class="bound-value">{{max() | intersperse}}</span>
-      </span>
-      <span class="increments">
-        <span ng-repeat="i in increments" class="i" style="left: {{i.offset}}%">
-          {{ i.value | intersperse }}
-        </span>
-      </span>
-    </span>
-    """
+            <span class="g-slider horizontal">
+            <span class="slider" ng-click="sliderClick($event)">
+            <span class="range" style="width: {{xPosition}}%;"></span>
+            <span class="handle" style="left: {{xPosition}}%;" ng-mousedown="handleMouseDown($event)">
+            <span class="value" ng-show="showValueInHandle">{{handleValue | intersperse}}</span>
+            </span>
+            </span>
+            <span class="side dec">
+            <span class="button" ng-click="step(-1)">-</span>
+            <span class="bound-value">{{min() | intersperse}}</span>
+            </span>
+            <span class="side inc">
+            <span class="button" ng-click="step(+1)">+</span>
+            <span class="bound-value">{{max() | intersperse}}</span>
+            </span>
+            <span class="increments">
+            <span ng-repeat="i in increments" class="i" style="left: {{i.offset}}%">
+            {{ i.value | intersperse }}
+            </span>
+            </span>
+            </span>
+            """
 
   replace: true
   restrict: "E"
@@ -58,19 +58,19 @@ gliderModule.directive 'slider', ['$document', ($document) ->
   link: (scope, element, attrs) ->
 
     parseIncrements = ->
-      if attrs.increments?
-        min = scope.min()
-        max = scope.max()
-        offsetK = 100 / Math.abs(max - min)
-        scope.increments = []
-        scope.snapValues = [min, max]
-        for i in attrs.increments.split(',')
-          i = parseInt(i)
-          if min < i < max
-            scope.increments.push value: i, offset: (i - min) * offsetK
-            scope.snapValues.push i
-        scope.snapValues.sort((a, b) -> a - b)
-      undefined
+      return unless attrs.increments?
+      min = scope.min()
+      max = scope.max()
+      return unless isFinite(min) and isFinite(max)
+      offsetK = 100 / Math.abs(max - min)
+      scope.increments = []
+      scope.snapValues = [min, max]
+      for i in attrs.increments.split(',')
+        i = parseInt(i)
+        if min < i < max
+          scope.increments.push value: i, offset: (i - min) * offsetK
+          scope.snapValues.push i
+      scope.snapValues.sort((a, b) -> a - b)
 
     sliderElement = element[0].getElementsByClassName('slider')[0]
     dragging = false
@@ -98,7 +98,7 @@ gliderModule.directive 'slider', ['$document', ($document) ->
           if diff < minDiff
             minDiff = diff
             closestValue = snapValue
-        scope.value = closestValue
+        scope.value = closestValue if isFinite(closestValue)
       refreshHandle()
 
     valueFromPosition = ->
