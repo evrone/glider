@@ -1,5 +1,5 @@
 ###
-  glider 0.1.4 - AngularJS slider
+  glider 0.1.4.1 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -141,7 +141,8 @@ gliderModule.directive 'slider', ['$document', ($document) ->
 
     scope.sliderClick = ($event) ->
       return if angular.element($event.target).hasClass('handle')
-      scope.xPosition = $event.layerX / sliderElement.offsetWidth * 100
+      offsetX = $event.layerX ? $event.originalEvent?.layerX
+      scope.xPosition = offsetX / sliderElement.offsetWidth * 100
       scope.value = valueFromPosition()
       snap()
 
