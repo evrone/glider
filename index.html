@@ -46,6 +46,13 @@
   <br/>
 
   <hr/>
+  <h4>Show value in handle with deferred update</h4>
+  <slider show_value_in_handle defer_update min="0" max="50000" value="show_value_in_handle_value"></slider>
+  <input ng-model="show_value_in_handle_value" maxlength="6"/>
+  <br/>
+  <br/>
+
+  <hr/>
   <h4>Increments with snapping</h4>
   <slider style="width: 800px" min="0" max="1000" value="price" increments="100,200,600,900"></slider>
   <input ng-model="price" maxlength="6"/>
@@ -53,10 +60,16 @@
   <br/>
 
   <hr/>
-  <h4>Increments with snapping (min is not zero)</h4>
-  <slider style="width: 800px" min="500" max="1000" value="price2" increments="600, 700, 800, 850"></slider>
+  <h4>Increments with snapping, min is not zero, show value in handle, as max value for next slider</h4>
+  <slider style="width: 800px" min="500" max="1000" value="price2" increments="600, 700, 800, 850" show_value_in_handle></slider>
   <input ng-model="price2" maxlength="6"/>
+  <br/>
+  <br/>
 
+  <hr/>
+  <h4>Increments with snapping, min is not zero, show value in handle, deferred value update</h4>
+  <slider style="width: 800px" min="500" max="price2" value="price3" increments="600, 700, 800, 850" show_value_in_handle defer_update></slider>
+  <input ng-model="price3" maxlength="6"/>
   <br/>
   <br/>
 

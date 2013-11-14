@@ -17,4 +17,6 @@ angular.module('gliderDemo', ['glider']).controller('gliderController', function
   $scope.deferred_value = 40000;
   $scope.show_value_in_handle_value = 40000;
 
+  $scope.price2 = 700;
+
 });

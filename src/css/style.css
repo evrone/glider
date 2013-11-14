@@ -1,18 +1,15 @@
-.g-slider:{
+.g-slider {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-.g-slider {
     display: inline-block;
     width: 200px;
     vertical-align: middle;
     padding: 0 20px;
-    position: relative;
-}
+    position: relative;}
 .g-slider > .slider {
     display: block;
     height: 13px;

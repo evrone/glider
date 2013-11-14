@@ -1,6 +1,6 @@
 # Glider - angularjs UI slider
 
-Glider - angularjs slider with no dependencies. Dead simple - ~~74~~ ~~98~~ 165 LOC.
+Glider - angularjs slider with no dependencies. Dead simple, < 200 LOC.
 
 ## Demo
 
