@@ -1,5 +1,5 @@
 ###
-  glider 0.1.4.3 - AngularJS slider
+  glider 0.1.4.4 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -119,10 +119,13 @@ gliderModule.directive 'slider', ['$document', ($document) ->
 
     scope.$watch 'value', (newVal, oldVal) ->
       return  if dragging
-      if scope.min() <= newVal <= scope.max()
-        refreshHandle()
+      if isFinite(newVal)
+        if scope.min() <= newVal <= scope.max()
+          refreshHandle()
+        else
+          scope.value = bound(newVal, scope.min(), scope.max())
       else
-        scope.value = bound(newVal, scope.min(), scope.max())
+        scope.value = if isFinite(oldVal) then oldVal else scope.min()
 
     scope.step = (steps) ->
       doStep = (steps)->
