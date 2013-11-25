@@ -1,5 +1,5 @@
 ###
-  glider 0.1.4.4 - AngularJS slider
+  glider 0.1.5 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
