@@ -1,5 +1,5 @@
 ###
-  glider 0.1.4.2 - AngularJS slider
+  glider 0.1.4.3 - AngularJS slider
   https://github.com/evrone/glider
   Copyright (c) 2013 Valentin Vasilyev, Dmitry Karpunin
   Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
@@ -57,6 +57,9 @@ gliderModule.directive 'slider', ['$document', ($document) ->
 
   link: (scope, element, attrs) ->
 
+    bound = (value, min, max) ->
+      Math.min(Math.max(min, value), max)
+
     parseIncrements = ->
       return unless attrs.increments?
       min = scope.min()
@@ -87,7 +90,7 @@ gliderModule.directive 'slider', ['$document', ($document) ->
         scope.xPosition = 0
       else
         scope.xPosition = (scope.value - scope.min()) / range * 100
-        scope.xPosition = Math.min(Math.max(0, scope.xPosition), 100)
+        scope.xPosition = bound(scope.xPosition, 0, 100)
       scope.handleValue = scope.value if scope.showValueInHandle
 
     snap = ->
@@ -119,7 +122,7 @@ gliderModule.directive 'slider', ['$document', ($document) ->
       if scope.min() <= newVal <= scope.max()
         refreshHandle()
       else
-        newVal = oldVal
+        scope.value = bound(newVal, scope.min(), scope.max())
 
     scope.step = (steps) ->
       doStep = (steps)->
