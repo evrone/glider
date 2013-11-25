@@ -27,8 +27,8 @@ gliderModule.directive 'slider', ['$document', ($document) ->
   template: """
             <span class="g-slider horizontal">
             <span class="slider" ng-click="sliderClick($event)">
-            <span class="range" style="width: {{xPosition}}%;"></span>
-            <span class="handle" style="left: {{xPosition}}%;" ng-mousedown="handleMouseDown($event)">
+            <span class="range" ng-style="{width: xPosition+'%'}"></span>
+            <span class="handle" ng-style="{left: xPosition +'%'}" ng-mousedown="handleMouseDown($event)">
             <span class="value" ng-show="showValueInHandle">{{handleValue | intersperse}}</span>
             </span>
             </span>
@@ -41,7 +41,7 @@ gliderModule.directive 'slider', ['$document', ($document) ->
             <span class="bound-value">{{max() | intersperse}}</span>
             </span>
             <span class="increments">
-            <span ng-repeat="i in increments" class="i" style="left: {{i.offset}}%">
+            <span ng-repeat="i in increments" class="i" ng-style="{left: i.offset+'%'}">
             {{ i.value | intersperse }}
             </span>
             </span>

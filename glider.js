@@ -30,7 +30,7 @@
   gliderModule.directive('slider', [
     '$document', function($document) {
       return {
-        template: "<span class=\"g-slider horizontal\">\n<span class=\"slider\" ng-click=\"sliderClick($event)\">\n<span class=\"range\" style=\"width: {{xPosition}}%;\"></span>\n<span class=\"handle\" style=\"left: {{xPosition}}%;\" ng-mousedown=\"handleMouseDown($event)\">\n<span class=\"value\" ng-show=\"showValueInHandle\">{{handleValue | intersperse}}</span>\n</span>\n</span>\n<span class=\"side dec\">\n<span class=\"button\" ng-click=\"step(-1)\">-</span>\n<span class=\"bound-value\">{{min() | intersperse}}</span>\n</span>\n<span class=\"side inc\">\n<span class=\"button\" ng-click=\"step(+1)\">+</span>\n<span class=\"bound-value\">{{max() | intersperse}}</span>\n</span>\n<span class=\"increments\">\n<span ng-repeat=\"i in increments\" class=\"i\" style=\"left: {{i.offset}}%\">\n{{ i.value | intersperse }}\n</span>\n</span>\n</span>",
+        template: "<span class=\"g-slider horizontal\">\n<span class=\"slider\" ng-click=\"sliderClick($event)\">\n<span class=\"range\" ng-style=\"{width: xPosition+'%'}\"></span>\n<span class=\"handle\" ng-style=\"{left: xPosition +'%'}\" ng-mousedown=\"handleMouseDown($event)\">\n<span class=\"value\" ng-show=\"showValueInHandle\">{{handleValue | intersperse}}</span>\n</span>\n</span>\n<span class=\"side dec\">\n<span class=\"button\" ng-click=\"step(-1)\">-</span>\n<span class=\"bound-value\">{{min() | intersperse}}</span>\n</span>\n<span class=\"side inc\">\n<span class=\"button\" ng-click=\"step(+1)\">+</span>\n<span class=\"bound-value\">{{max() | intersperse}}</span>\n</span>\n<span class=\"increments\">\n<span ng-repeat=\"i in increments\" class=\"i\" ng-style=\"{left: i.offset+'%'}\">\n{{ i.value | intersperse }}\n</span>\n</span>\n</span>",
         replace: true,
         restrict: "E",
         scope: {
@@ -262,7 +262,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=glider.map
-*/
