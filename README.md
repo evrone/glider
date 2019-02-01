@@ -1,18 +1,25 @@
+# PLEASE NOTE, THIS PROJECT IS NO LONGER BEING MAINTAINED
 # Glider - angularjs UI slider
 
 Glider - angularjs slider with no dependencies. Dead simple, < 200 LOC.
+
+<a href="https://evrone.com/?utm_source=github.com">
+  <img src="https://evrone.com/logo/evrone-sponsored-logo.png"
+       alt="Sponsored by Evrone" width="231">
+</a>
 
 ## Demo
 
 Demo is available here: http://evrone.github.io/glider
 
-## Installation
+## Getting Started
+### Installation
 
-### Bower
+##### Bower
 
 `bower install glider`
 
-### Ruby-on-Rails
+##### Ruby-on-Rails
 
 Add this to your Gemfile
 
@@ -27,7 +34,7 @@ After that you can add the file to sprockets:
 
 ` //= require glider `
 
-## Usage
+### Usage
 
 Add module as a dependency:
 
@@ -59,7 +66,7 @@ Use increments with snapping:
 <slider min="50" max="500" increments="100,200,300,400" value="price"></slider>
 ```
 
-## CoffeeScript to JavaScript compilation
+##### CoffeeScript to JavaScript compilation
 
 To convert the `src/glider.coffee` to javascript, use coffeescript compiler.
 Install it with:
@@ -76,7 +83,7 @@ coffee -c -o . --map src/glider.coffee
 
 This will compile the src/glider.coffee to glider.js and generate the source map.
 
-## Minification
+##### Minification
 
 To minify the file I recommend using [uglifyjs][uglifyjs]
 If you don't have it installed, install it with:
@@ -96,28 +103,30 @@ uglifyjs glider.js > glider.min.js -mc
 If you don't have node.js installed on your machine, you can create a minified version of the library with
 online services, such as [Google Closure compiler][closure]
 
-### Authors
 
-* Valve - Valentin Vasilyev
-* KODerFunk - Dmitry Karpunin
+## Contributing
 
-Inspired by an anonymous plunkr snippet
+Please read [Code of Conduct](CODE-OF-CONDUCT.md) and [Contributing Guidelines](CONTRIBUTING.md) for submitting pull requests to us.
 
-### Licence
+## Versioning
 
-This code is [MIT][mit] licenced:
+We use [SemVer](http://semver.org/) for versioning. For the versions available, 
+see the [tags on this repository](https://github.com/evrone/glider/tags). 
 
-Copyright (c) 2013 Valentin Valve Vasilyev, Dmitry KODer Karpunin
+## Changelog
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The changelog is [here](CHANGELOG.md).
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+## Authors
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+* [Valentin Vasilyev](https://github.com/Valve) 
+* [Dmitry Karpunin](https://github.com/KODerFunk) 
 
-[mit]: http://www.opensource.org/licenses/mit-license.php
-[murmur]: http://en.wikipedia.org/wiki/MurmurHash
-[research]: https://panopticlick.eff.org/browser-uniqueness.pdf
-[phantomjs]: http://phantomjs.org/
+See also the list of [contributors](https://github.com/evrone/glider/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
 [uglifyjs]: https://github.com/mishoo/UglifyJS
 [closure]: http://closure-compiler.appspot.com
